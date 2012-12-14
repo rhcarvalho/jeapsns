@@ -1,4 +1,6 @@
 
+<meta http-equiv=“Content-Type” content=“text/html;charset=utf-8″/>
+
 {% if name != '' %}
 
  欢迎  {{ name }} 来到本网站 
@@ -6,3 +8,19 @@
 <a href ="/accounts/login/?next=/"> 登录 </a>
 <a href ="/accounts/register/?next=/"> 注册 </a>
 {% endif %}
+<hr>
+<form method="post" action="">
+{% csrf_token %}
+<table>
+{{form.as_table}}
+</table>
+
+<input type="submit" value="发布" />
+</form>
+
+<hr>
+<table>
+{% for n in post_all %}
+<tr><td>{{ n.author}} 说： {{ n.content }}</td> </tr>
+{% endfor%}
+</table>

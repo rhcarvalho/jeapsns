@@ -102,6 +102,8 @@ ROOT_URLCONF = 'jeapsns.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'jeapsns.wsgi.application'
 
+AUTH_PROFILE_MODULE = 'jeapsns.UserProfile'
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -120,6 +122,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+	'jeapsns',
 )
 
 # A sample logging configuration. The only tangible logging
