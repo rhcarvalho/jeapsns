@@ -1,0 +1,17 @@
+
+
+{% include "head.html" %}
+
+<div class="container">
+
+ <div class="styleguide">
+  <div class="menu-container" style="width:300px">
+   <ul class="menu">
+	{% for n in user_all %}
+   <li>名字:  {{n.username}}  {% if n.follow != None %} <a href=/unfollow>取消关注</a> {% else %}<a href=/follow/?username={{n.username}}> 关注</a> {% endif%}</li>
+	{% endfor %}
+   </ul>
+  </div>
+
+ </div> <!--styleguide-->
+</div> <!--container-->

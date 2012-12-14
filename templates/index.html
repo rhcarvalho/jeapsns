@@ -1,17 +1,6 @@
 
-<meta http-equiv=“Content-Type” content=“text/html;charset=utf-8″/>
 
 {% include "head.html" %}
-<div class="pagehead">
-<div class="container">
-   <ul class="tabs">
-   <li><a href=/>首页</a></li>
-   <li><a href=/accounts/login/?next=/>登录</a></li>
-   <li><a href=/accounts/register/?next=/accounts/login>注册</a></li>
-   </ul>
- 
-</div> <!--container-->
-</div> <!--pagehead-->
 
 <div class="container">
 
@@ -40,7 +29,7 @@
  {% for n in post_all %}
 
    <div class="discussion-bubble">
-	<a icon_class=" mini-icon-follow" class="minibutton" href="#"><span class="mini-icon  mini-icon-follow"></span>{{ n.author }} </a>
+	<a icon_class=" mini-icon-follow" class="minibutton" href="#"><span class="mini-icon  mini-icon-follow"></span>{{ n.author }} </a> {{ n.created }}
       <div class="discussion-bubble-content bubble">
         <div class="discussion-bubble-inner">
           {{ n.content }}<!-- content goes here -->

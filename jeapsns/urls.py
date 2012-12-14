@@ -16,5 +16,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/$', 'django.contrib.auth.views.login',{'template_name': 'login.html'}),
 	(r'^accounts/register/$', 'jeapsns.views.register'),
+	(r'^accounts/user/$', 'jeapsns.views.user_list'),
 	(r'^$', 'jeapsns.views.index'),
+	(r'^follow/$', 'jeapsns.views.follow'),
 )
