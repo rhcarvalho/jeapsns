@@ -1,26 +1,55 @@
 
 <meta http-equiv=“Content-Type” content=“text/html;charset=utf-8″/>
 
-{% if name != '' %}
+{% include "head.html" %}
+<div class="pagehead">
+<div class="container">
+   <ul class="tabs">
+   <li><a href=/>首页</a></li>
+   <li><a href=/accounts/login/?next=/>登录</a></li>
+   <li><a href=/accounts/register/?next=/accounts/login>注册</a></li>
+   </ul>
+ 
+</div> <!--container-->
+</div> <!--pagehead-->
 
- 欢迎  {{ name }} 来到本网站 
-{% else %}
-<a href ="/accounts/login/?next=/"> 登录 </a>
-<a href ="/accounts/register/?next=/"> 注册 </a>
-{% endif %}
+<div class="container">
+
+ <div class="styleguide">
+  <div class="menu-container">
+   <ul class="menu">
+   <li>名字: {% if name != '' %} {{name}}{% endif %}</li>
+   <li>关注</li>
+   <li>其他</li>
+   </ul>
+  </div>
+
+  <div class="content">
+
 <hr>
 <form method="post" action="">
 {% csrf_token %}
 <table>
 {{form.as_table}}
 </table>
-
 <input type="submit" value="发布" />
 </form>
 
+
 <hr>
-<table>
-{% for n in post_all %}
-<tr><td>{{ n.author}} 说： {{ n.content }}</td> </tr>
-{% endfor%}
-</table>
+ {% for n in post_all %}
+
+   <div class="discussion-bubble">
+	<a icon_class=" mini-icon-follow" class="minibutton" href="#"><span class="mini-icon  mini-icon-follow"></span>{{ n.author }} </a>
+      <div class="discussion-bubble-content bubble">
+        <div class="discussion-bubble-inner">
+          {{ n.content }}<!-- content goes here -->
+        </div>
+      </div>
+    </div> <!-- /.discussion-bubble -->
+
+ {% endfor%}
+
+  </div> <!--content-->
+ </div> <!--styleguide-->
+</div> <!--container-->
