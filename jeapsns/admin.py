@@ -1,6 +1,9 @@
 from django.contrib import admin
 from jeapsns.models import post, FollowRelation, msg
 
-admin.site.register(post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('author', 'content', 'created')
+
+admin.site.register(post, PostAdmin)
 admin.site.register(FollowRelation)
 admin.site.register(msg)
