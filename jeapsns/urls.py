@@ -18,5 +18,6 @@ urlpatterns = patterns('',
 	(r'^accounts/register/$', 'jeapsns.views.register'),
 	(r'^accounts/user/$', 'jeapsns.views.user_list'),
 	(r'^$', 'jeapsns.views.index'),
+	(r'^save$', 'jeapsns.views.save'),
 	(r'^follow/$', 'jeapsns.views.follow'),
 )
