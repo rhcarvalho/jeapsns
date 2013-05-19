@@ -7,7 +7,7 @@
  <div class="styleguide">
   <div class="menu-container">
    <ul class="menu">
-   <li>名字: {% if name != '' %} {{name}}{% endif %}</li>
+   <li>名字: {% if name != '' %} {{name}} {% else %} Anonymous{% endif %}</li>
    <li>关注</li>
    <li>其他</li>
    </ul>
@@ -15,14 +15,22 @@
 
   <div class="content">
 
+{% if user.is_authenticated %}
 <hr>
-<form method="post" action="">
+<form method="post" action="/save">
 {% csrf_token %}
 <table>
 {{form.as_table}}
 </table>
 <input type="submit" value="发布" />
 </form>
+
+{% if confirm %}
+<div style="background: #ccc;">
+  Thanks for posting!
+</div>
+{% endif %}
+{% endif %}
 
 
 <hr>

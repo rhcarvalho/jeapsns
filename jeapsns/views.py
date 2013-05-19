@@ -19,22 +19,49 @@ def register(request):
             		new_user = form.save()
             		return HttpResponseRedirect("/")
 
-def index(request):
-	if request.user.is_authenticated():
-		form = postForm()
-		post_all = post.objects.order_by('-created')   # ORDER BY created DESC
-		if request.method == 'POST':
-			new_post = post(author=request.user.username,content = request.POST['content'])
-			new_post.save()
-			m = msg (msgid=new_post.id,user=request.user.username)
-			m.save()
-			f = FollowRelation.objects.filter(follower=request.user.username)
-			for n in f:
-				m = msg(msgid=new_post.id,user=n.user)
-				m.save()
-		return render_to_response("index.html",{'name':request.user.username,'form':form,\
-			"post_all":post_all},context_instance=RequestContext(request))
-	return HttpResponseRedirect("/accounts/login/?next=/")
+
+# HTTP GET
+def index(request, confirm=False):
+    form = PostForm()
+    post_all = post.objects.order_by('-created')   # ORDER BY created DESC
+    return render_to_response("index.html",
+        {'name': request.user.username,
+         'form': form,
+         "post_all": post_all,
+         "confirm": confirm},
+        context_instance=RequestContext(request))
+    return HttpResponseRedirect("/accounts/login/?next=/")
+
+
+# HTTP POST
+def save_post(request):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            form = PostForm(request.POST)
+            if not form.is_valid():
+                return HttpResponseRedirect("/")
+            
+
+            #new_post = post(author=request.user.username,
+            #                content=request.POST['content'])
+            new_post = form.save(commit=False) # => saves a new object into DATABASE
+            new_post.author = request.user.username
+            new_post.save()
+            
+            m = msg(msgid=new_post.id,
+                    user=request.user.username)
+            m.save()
+            f = FollowRelation.objects.filter(follower=request.user.username)
+            for n in f:
+                m = msg(msgid=new_post.id, user=n.user)
+                m.save()
+            return HttpResponseRedirect("/confirm")
+    return HttpResponseRedirect("/")
+
+# HTTP GET
+def confirm(request):
+    return index(request, confirm=True)
+
 
 def user_list(request):
 	if request.user.is_authenticated():
