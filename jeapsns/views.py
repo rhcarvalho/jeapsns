@@ -21,7 +21,7 @@ def register(request):
 
 def index(request):
 	if request.user.is_authenticated():
-		form = postForm()
+		form = PostForm()
 		post_all = post.objects.order_by('-created')   # ORDER BY created DESC
 		if request.method == 'POST':
 			new_post = post(author=request.user.username,content = request.POST['content'])
