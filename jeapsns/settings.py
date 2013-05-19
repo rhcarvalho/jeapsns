@@ -29,7 +29,7 @@ TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-CN'
 
 SITE_ID = 1
 
@@ -109,7 +109,23 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    
+    
+    # __file__ => "/Users/rodolfo/...../jeapsns/jeapsns/settings.py"
+    # os.path.dirname(__file__) => "/Users/rodolfo/...../jeapsns/jeapsns/"
+    
+    # os.path.join("a","b","c") => "a/b/c" (Linux/Mac)
+    #                              "a\b\c" (Windows)
+    # "/".join("a","b","c") => "a/b/c"
+    # ..
+    # templates
+    
+    # "/Users/rodolfo/....project/jeapsns/templates"
+    
+    
     os.path.join(os.path.dirname(__file__), os.path.pardir, 'templates').replace('\\','/'),
+    
+    
 )
 
 INSTALLED_APPS = (
